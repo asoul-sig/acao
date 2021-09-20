@@ -8,11 +8,20 @@ import (
 	"io"
 	"net/http"
 
+	"github.com/asoul-video/asoul-video/pkg/model"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/pkg/errors"
 )
 
 const userAgent = `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36`
+
+var asoul = []model.MemberSecUID{
+	model.MemberSecUIDAva,
+	model.MemberSecUIDBella,
+	model.MemberSecUIDCarol,
+	model.MemberSecUIDDiana,
+	model.MemberSecUIDEileen,
+}
 
 var Sources = make(map[string]Source)
 

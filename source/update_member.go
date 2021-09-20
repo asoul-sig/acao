@@ -26,7 +26,7 @@ func (s *UpdateMember) String() string {
 func (s *UpdateMember) Scrap() ([]jsoniter.RawMessage, error) {
 	callbackData := make([]jsoniter.RawMessage, 0, 5)
 
-	for _, secUID := range []model.MemberSecUID{} {
+	for _, secUID := range asoul {
 		userInfo, err := scrapMember(secUID)
 		if err != nil {
 			log.Error("Failed to scrap member data: %v", err)
