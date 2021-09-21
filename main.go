@@ -34,6 +34,7 @@ func main() {
 
 	for result := range resultChan {
 		if result.End {
+			close(resultChan)
 			break
 		}
 
