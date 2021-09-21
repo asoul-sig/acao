@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/flamego/flamego"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/pkg/errors"
 	log "unknwon.dev/clog/v2"
@@ -30,33 +29,25 @@ func main() {
 		log.Fatal("Report type not found")
 	}
 
-	f := flamego.Classic()
+	resultChan := make(chan source.Result, 5)
+	go src.Scrap(resultChan)
 
-	f.NotFound(func(ctx flamego.Context) {
-		resultChan := make(chan source.Result, 5)
-		go src.Scrap(resultChan)
-
-		for result := range resultChan {
-			if result.End {
-				break
-			}
-
-			var err error
-			for i := 1; i <= 5; i++ { // Retry 5 times.
-				if err = reportData(model.ReportType(reportType), result.Data); err != nil {
-					log.Warn("Failed to report data: %v, retry %d / 5", err, i)
-					continue
-				}
-			}
-			if err != nil {
-				log.Error("Failed to report data: %v", err)
-			}
+	for result := range resultChan {
+		if result.End {
+			break
 		}
 
-		ctx.ResponseWriter().WriteHeader(http.StatusNoContent)
-	})
-
-	f.Run(9000)
+		var err error
+		for i := 1; i <= 5; i++ { // Retry 5 times.
+			if err = reportData(model.ReportType(reportType), result.Data); err != nil {
+				log.Warn("Failed to report data: %v, retry %d / 5", err, i)
+				continue
+			}
+		}
+		if err != nil {
+			log.Error("Failed to report data: %v", err)
+		}
+	}
 }
 
 func reportData(reportType model.ReportType, reportData jsoniter.RawMessage) error {
