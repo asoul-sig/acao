@@ -33,7 +33,7 @@ func main() {
 	f := flamego.Classic()
 
 	f.NotFound(func(ctx flamego.Context) {
-		resultChan := make(chan source.Result, 30)
+		resultChan := make(chan source.Result, 5)
 		go src.Scrap(resultChan)
 
 		for result := range resultChan {

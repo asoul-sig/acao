@@ -43,15 +43,15 @@ func (s *CreateVideo) Scrap(result chan Result) {
 
 			for _, video := range memberVideos {
 				log.Trace("Fetch video %q", video.Description)
+			}
 
-				callback, err := jsoniter.Marshal(video)
-				if err != nil {
-					log.Error("Failed to encode callback JSON: %v", err)
-					continue
-				}
-				result <- Result{
-					Data: callback,
-				}
+			callback, err := jsoniter.Marshal(memberVideos)
+			if err != nil {
+				log.Error("Failed to encode callback JSON: %v", err)
+				continue
+			}
+			result <- Result{
+				Data: callback,
 			}
 
 			if nextCursor == 0 {
