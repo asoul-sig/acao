@@ -28,8 +28,8 @@ func (s *CreateVideo) String() string {
 	return "create_video"
 }
 
-func (s *CreateVideo) Scrap() ([]jsoniter.RawMessage, error) {
-	callbackData := make([]jsoniter.RawMessage, 0)
+func (s *CreateVideo) Scrap(result chan Result) {
+	defer func() { result <- Result{End: true} }()
 
 	for _, secUID := range asoul {
 		cursor := int64(0)
@@ -42,12 +42,16 @@ func (s *CreateVideo) Scrap() ([]jsoniter.RawMessage, error) {
 			}
 
 			for _, video := range memberVideos {
+				log.Trace("Fetch video %q", video.Description)
+
 				callback, err := jsoniter.Marshal(video)
 				if err != nil {
 					log.Error("Failed to encode callback JSON: %v", err)
 					continue
 				}
-				callbackData = append(callbackData, callback)
+				result <- Result{
+					Data: callback,
+				}
 			}
 
 			if nextCursor == 0 {
@@ -56,8 +60,6 @@ func (s *CreateVideo) Scrap() ([]jsoniter.RawMessage, error) {
 			cursor = nextCursor
 		}
 	}
-
-	return callbackData, nil
 }
 
 type videoInfo struct {

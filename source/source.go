@@ -23,11 +23,16 @@ var asoul = []model.MemberSecUID{
 	model.MemberSecUIDEileen,
 }
 
+type Result struct {
+	Data jsoniter.RawMessage
+	End  bool
+}
+
 var Sources = make(map[string]Source)
 
 type Source interface {
 	String() string
-	Scrap() ([]jsoniter.RawMessage, error)
+	Scrap(result chan Result)
 }
 
 func Register(source Source) {

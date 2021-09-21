@@ -23,8 +23,8 @@ func (s *UpdateMember) String() string {
 	return "update_member"
 }
 
-func (s *UpdateMember) Scrap() ([]jsoniter.RawMessage, error) {
-	callbackData := make([]jsoniter.RawMessage, 0, 5)
+func (s *UpdateMember) Scrap(result chan Result) {
+	defer func() { result <- Result{End: true} }()
 
 	for _, secUID := range asoul {
 		userInfo, err := scrapMember(secUID)
@@ -60,10 +60,10 @@ func (s *UpdateMember) Scrap() ([]jsoniter.RawMessage, error) {
 
 		log.Trace("Fetch member %q", userInfo.UserInfo.Nickname)
 
-		callbackData = append(callbackData, callback)
+		result <- Result{
+			Data: callback,
+		}
 	}
-
-	return callbackData, nil
 }
 
 type userInfo struct {

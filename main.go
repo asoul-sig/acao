@@ -25,7 +25,7 @@ func main() {
 
 	reportType := os.Getenv("SOURCE_REPORT_TYPE")
 
-	source, ok := source.Sources[reportType]
+	src, ok := source.Sources[reportType]
 	if !ok {
 		log.Fatal("Report type not found")
 	}
@@ -33,20 +33,23 @@ func main() {
 	f := flamego.Classic()
 
 	f.NotFound(func(ctx flamego.Context) {
-		respData, err := source.Scrap()
-		if err != nil {
-			log.Error("Failed to scrap source: %v", err)
-			_, _ = ctx.ResponseWriter().Write([]byte(err.Error()))
-			ctx.ResponseWriter().WriteHeader(http.StatusInternalServerError)
-			return
-		}
+		resultChan := make(chan source.Result, 30)
+		go src.Scrap(resultChan)
 
-		for _, data := range respData {
-			if err := reportData(model.ReportType(reportType), data); err != nil {
+		for result := range resultChan {
+			if result.End {
+				break
+			}
+
+			var err error
+			for i := 1; i <= 5; i++ { // Retry 5 times.
+				if err = reportData(model.ReportType(reportType), result.Data); err != nil {
+					log.Warn("Failed to report data: %v, retry %d / 5", err, i)
+					continue
+				}
+			}
+			if err != nil {
 				log.Error("Failed to report data: %v", err)
-				_, _ = ctx.ResponseWriter().Write([]byte(err.Error()))
-				ctx.ResponseWriter().WriteHeader(http.StatusInternalServerError)
-				return
 			}
 		}
 
