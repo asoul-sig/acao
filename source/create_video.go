@@ -13,10 +13,9 @@ import (
 	jsoniter "github.com/json-iterator/go"
 	"github.com/pkg/errors"
 	log "unknwon.dev/clog/v2"
-)
 
-// FIXME: generate it every times.
-const signature = "4D9ASAAAgX8fwL-3-k2Q6eA.QF"
+	"github.com/asoul-video/acao/util"
+)
 
 func init() {
 	Register(&CreateVideo{})
@@ -183,6 +182,9 @@ type videoInfo struct {
 
 func scrapMemberVideos(secUID model.MemberSecUID, cursor int64) (videos []*model.CreateVideo, nextCursor int64, _ error) {
 	time.Sleep(2 * time.Second)
+
+	signature := util.MakeSignature("e99p1ant", userAgent)
+	log.Trace("Signature: %v", signature)
 
 	url := fmt.Sprintf("https://www.iesdouyin.com/web/api/v2/aweme/post/?sec_uid=%s&count=50&max_cursor=%d&_signature=%s", secUID, cursor, signature)
 
