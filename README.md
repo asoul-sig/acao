@@ -48,7 +48,7 @@ $ Raika function create \
 $ GOOS=linux go build .
 
 $ Raika function create \
-    --name asoul_update_video_meta \
+    --name asoul_video_update_video_meta \
     --memory 128 \
     --init-timeout 300 \
     --runtime-timeout 600 \
