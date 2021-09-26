@@ -42,6 +42,25 @@ $ Raika function create \
     --platform aliyun
 ```
 
+### `update_video_meta` Update video metadata, especially the created time.
+
+```bash
+$ GOOS=linux go build .
+
+$ Raika function create \
+    --name asoul_update_video_meta \
+    --memory 128 \
+    --init-timeout 10 \
+    --runtime-timeout 10 \
+    --binary-file acao \
+    --trigger=cron \
+    --cron="0 30 * * * *" \
+    --env SOURCE_REPORT_TYPE=update_video_meta \
+    --env SOURCE_REPORT_URL=https://asoul.video/source/report \
+    --env SOURCE_REPORT_KEY=<REDACTED> \
+    --platform aliyun
+```
+
 ## License
 
 MIT
