@@ -12,8 +12,8 @@ $ GOOS=linux go build .
 $ Raika function create \
     --name asoul_video_update_member \
     --memory 128 \
-    --init-timeout 10 \
-    --runtime-timeout 10 \
+    --init-timeout 300 \
+    --runtime-timeout 600 \
     --binary-file acao \
     --trigger=cron \
     --cron="0 30 * * * *" \
@@ -31,8 +31,8 @@ $ GOOS=linux go build .
 $ Raika function create \
     --name asoul_video_create_video \
     --memory 128 \
-    --init-timeout 10 \
-    --runtime-timeout 10 \
+    --init-timeout 300 \
+    --runtime-timeout 600 \
     --binary-file acao \
     --trigger=cron \
     --cron="0 30 * * * *" \
@@ -50,8 +50,8 @@ $ GOOS=linux go build .
 $ Raika function create \
     --name asoul_update_video_meta \
     --memory 128 \
-    --init-timeout 10 \
-    --runtime-timeout 10 \
+    --init-timeout 300 \
+    --runtime-timeout 600 \
     --binary-file acao \
     --trigger=cron \
     --cron="0 30 * * * *" \
