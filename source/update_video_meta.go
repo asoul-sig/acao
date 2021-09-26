@@ -110,6 +110,14 @@ func (s *UpdateVideoMeta) scrapVideoList(page int) ([]*model.UpdateVideoMeta, er
 			OriginCoverURLs:  meta.Video.OriginCover.UrlList,
 			DynamicCoverURLs: meta.Video.DynamicCover.UrlList,
 			CreatedAt:        createdAt,
+
+			Statistic: model.Statistic{
+				Share:   meta.Statistics.ShareCount,
+				Forward: meta.Statistics.ForwardCount,
+				Digg:    meta.Statistics.DiggCount,
+				Play:    meta.Statistics.PlayCount,
+				Comment: meta.Statistics.CommentCount,
+			},
 		})
 	}
 
@@ -142,11 +150,12 @@ type videoMeta struct {
 			UserCount      int         `json:"user_count"`
 		} `json:"cha_list"`
 		Statistics struct {
-			DiggCount    int    `json:"digg_count"`
-			PlayCount    int    `json:"play_count"`
-			ShareCount   int    `json:"share_count"`
+			DiggCount    int64  `json:"digg_count"`
+			PlayCount    int64  `json:"play_count"`
+			ShareCount   int64  `json:"share_count"`
 			AwemeId      string `json:"aweme_id"`
-			CommentCount int    `json:"comment_count"`
+			CommentCount int64  `json:"comment_count"`
+			ForwardCount int64  `json:"forward_count"`
 		} `json:"statistics"`
 		RiskInfos struct {
 			Warn    bool   `json:"warn"`

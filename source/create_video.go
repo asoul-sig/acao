@@ -167,12 +167,12 @@ type videoInfo struct {
 		Promotions interface{} `json:"promotions"`
 		Desc       string      `json:"desc"`
 		Statistics struct {
-			PlayCount    int    `json:"play_count"`
-			ShareCount   int    `json:"share_count"`
-			ForwardCount int    `json:"forward_count"`
+			PlayCount    int64  `json:"play_count"`
+			ShareCount   int64  `json:"share_count"`
+			ForwardCount int64  `json:"forward_count"`
 			AwemeId      string `json:"aweme_id"`
-			CommentCount int    `json:"comment_count"`
-			DiggCount    int    `json:"digg_count"`
+			CommentCount int64  `json:"comment_count"`
+			DiggCount    int64  `json:"digg_count"`
 		} `json:"statistics"`
 	} `json:"aweme_list"`
 	MaxCursor int64 `json:"max_cursor"`
@@ -219,6 +219,14 @@ func scrapMemberVideos(secUID model.MemberSecUID, cursor int64) (videos []*model
 			VideoRatio:       video.Video.Ratio,
 			VideoURLs:        video.Video.PlayAddr.UrlList,
 			VideoCDNURL:      "", // TODO Upload to my CDN.
+
+			Statistic: model.Statistic{
+				Share:   video.Statistics.ShareCount,
+				Forward: video.Statistics.ForwardCount,
+				Digg:    video.Statistics.DiggCount,
+				Play:    video.Statistics.PlayCount,
+				Comment: video.Statistics.CommentCount,
+			},
 		})
 	}
 
