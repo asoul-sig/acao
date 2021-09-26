@@ -207,6 +207,7 @@ func scrapMemberVideos(secUID model.MemberSecUID, cursor int64) (videos []*model
 
 		createVideos = append(createVideos, &model.CreateVideo{
 			ID:               video.AwemeId,
+			VID:              video.Video.Vid,
 			AuthorSecUID:     model.MemberSecUID(video.Author.SecUid),
 			Description:      video.Desc,
 			TextExtra:        textExtra,
