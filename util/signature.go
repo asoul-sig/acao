@@ -61,10 +61,14 @@ function make_signature(input, ua){
     tmp = tmp1 | tmp2
     char_loop(tmp)
     
+    k1 = 311735490 ^ v1 // From the canvas, it's a const.
+
     tmp1 = v2 << 26
-    tmp2 = (-1 ^ v1) >>> 6
+    tmp2 = k1 >>> 6
     tmp = tmp1 | tmp2
     char_loop(tmp)
+
+    char_loop(k1, 0)
     
     k1 = str_loop(input, k0)
     tmp1 = k1 % constNum
