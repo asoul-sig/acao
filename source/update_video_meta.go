@@ -91,7 +91,7 @@ func (s *UpdateVideoMeta) scrapVideoList(page int) ([]*model.UpdateVideoMeta, er
 		for i := 1; i <= 3; i++ {
 			metaData, err = s.getVideoMeta(id)
 			if err != nil || len(metaData.ItemList) == 0 {
-				log.Warn("Failed to get video %q meta data [ %d / 3 ]: %v", i, err)
+				log.Warn("Failed to get video %q meta data [ %d / 3 ]: %v", id, i, err)
 				continue
 			}
 			break
@@ -269,6 +269,8 @@ type videoMeta struct {
 }
 
 func (s *UpdateVideoMeta) getVideoMeta(id string) (*videoMeta, error) {
+	time.Sleep(500 * time.Millisecond)
+
 	signature := util.MakeSignature("e99p1ant", userAgent)
 	log.Trace("Signature: %v for video: %q", signature, id)
 
