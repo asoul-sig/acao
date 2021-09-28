@@ -101,6 +101,11 @@ func (s *UpdateVideoMeta) scrapVideoList(page int) ([]*model.UpdateVideoMeta, er
 			continue
 		}
 
+		if len(metaData.ItemList) == 0 {
+			log.Error("Video %q not found", id)
+			continue
+		}
+
 		meta := metaData.ItemList[0]
 		createdAt := time.Unix(int64(meta.CreateTime), 0)
 
