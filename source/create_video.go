@@ -7,7 +7,6 @@ package source
 import (
 	"fmt"
 	"net/http"
-	"time"
 
 	"github.com/asoul-video/asoul-video/pkg/model"
 	jsoniter "github.com/json-iterator/go"
@@ -181,8 +180,6 @@ type videoInfo struct {
 }
 
 func scrapMemberVideos(secUID model.MemberSecUID, cursor int64) (videos []*model.CreateVideo, nextCursor int64, _ error) {
-	time.Sleep(2 * time.Second)
-
 	signature := util.MakeSignature("e99p1ant", userAgent)
 	log.Trace("Signature: %v", signature)
 

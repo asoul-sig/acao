@@ -44,6 +44,7 @@ func main() {
 
 			var err error
 			for i := 1; i <= 5; i++ { // Retry 5 times.
+				log.Trace("Report data to backend...")
 				if err = reportData(model.ReportType(reportType), result.Data); err != nil {
 					log.Warn("Failed to report data: %v, retry %d / 5", err, i)
 					continue

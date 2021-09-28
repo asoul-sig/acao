@@ -269,8 +269,6 @@ type videoMeta struct {
 }
 
 func (s *UpdateVideoMeta) getVideoMeta(id string) (*videoMeta, error) {
-	time.Sleep(1 * time.Second)
-
 	signature := util.MakeSignature("e99p1ant", userAgent)
 	log.Trace("Signature: %v for video: %q", signature, id)
 
