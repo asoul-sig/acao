@@ -180,7 +180,7 @@ type videoInfo struct {
 }
 
 func scrapMemberVideos(secUID model.MemberSecUID, cursor int64) (videos []*model.CreateVideo, nextCursor int64, _ error) {
-	signature := util.MakeSignature("e99p1ant", userAgent)
+	signature := util.MakeSignature("e99p1ant", util.UserAgent)
 	log.Trace("Signature: %v", signature)
 
 	url := fmt.Sprintf("https://www.iesdouyin.com/web/api/v2/aweme/post/?sec_uid=%s&count=50&max_cursor=%d&_signature=%s", secUID, cursor, signature)
@@ -202,14 +202,27 @@ func scrapMemberVideos(secUID model.MemberSecUID, cursor int64) (videos []*model
 			textExtra = append(textExtra, extra.HashtagName)
 		}
 
+		originCoverURLs := make([]string, 0, len(video.Video.OriginCover.UrlList))
+		for _, url := range video.Video.OriginCover.UrlList {
+			originCoverURLs = append(originCoverURLs, util.ConvertSignatureCDN(url))
+		}
+
+		dynamicCoverURLs := make([]string, 0, len(video.Video.DynamicCover.UrlList))
+		for _, url := range video.Video.DynamicCover.UrlList {
+			dynamicCoverURLs = append(dynamicCoverURLs, util.ConvertSignatureCDN(url))
+		}
+
+		isDynamicCover := len(dynamicCoverURLs) > 0 && util.IsGIFImage(dynamicCoverURLs[0])
+
 		createVideos = append(createVideos, &model.CreateVideo{
 			ID:               video.AwemeId,
 			VID:              video.Video.Vid,
 			AuthorSecUID:     model.MemberSecUID(video.Author.SecUid),
 			Description:      video.Desc,
 			TextExtra:        textExtra,
-			OriginCoverURLs:  video.Video.OriginCover.UrlList,
-			DynamicCoverURLs: video.Video.DynamicCover.UrlList,
+			OriginCoverURLs:  originCoverURLs,
+			DynamicCoverURLs: dynamicCoverURLs,
+			IsDynamicCover:   isDynamicCover,
 			VideoHeight:      video.Video.Height,
 			VideoWidth:       video.Video.Width,
 			VideoDuration:    video.Video.Duration,

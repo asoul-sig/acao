@@ -109,11 +109,24 @@ func (s *UpdateVideoMeta) scrapVideoList(page int) ([]*model.UpdateVideoMeta, er
 		meta := metaData.ItemList[0]
 		createdAt := time.Unix(int64(meta.CreateTime), 0)
 
+		originCoverURLs := make([]string, 0, len(meta.Video.OriginCover.UrlList))
+		for _, url := range meta.Video.OriginCover.UrlList {
+			originCoverURLs = append(originCoverURLs, util.ConvertSignatureCDN(url))
+		}
+
+		dynamicCoverURLs := make([]string, 0, len(meta.Video.DynamicCover.UrlList))
+		for _, url := range meta.Video.DynamicCover.UrlList {
+			dynamicCoverURLs = append(dynamicCoverURLs, util.ConvertSignatureCDN(url))
+		}
+
+		isDynamicCover := len(dynamicCoverURLs) > 0 && util.IsGIFImage(dynamicCoverURLs[0])
+
 		updateVideoMetas = append(updateVideoMetas, &model.UpdateVideoMeta{
 			ID:               id,
 			VID:              meta.Video.Vid,
-			OriginCoverURLs:  meta.Video.OriginCover.UrlList,
-			DynamicCoverURLs: meta.Video.DynamicCover.UrlList,
+			OriginCoverURLs:  originCoverURLs,
+			DynamicCoverURLs: dynamicCoverURLs,
+			IsDynamicCover:   isDynamicCover,
 			CreatedAt:        createdAt,
 
 			Statistic: model.Statistic{
@@ -276,7 +289,7 @@ type videoMeta struct {
 func (s *UpdateVideoMeta) getVideoMeta(id string) (*videoMeta, error) {
 	time.Sleep(500 * time.Millisecond)
 
-	signature := util.MakeSignature("e99p1ant", userAgent)
+	signature := util.MakeSignature("e99p1ant", util.UserAgent)
 	log.Trace("Signature: %v for video: %q", signature, id)
 
 	url := fmt.Sprintf("https://www.iesdouyin.com/web/api/v2/aweme/iteminfo/?item_ids=%s&_signature=%s", id, signature)

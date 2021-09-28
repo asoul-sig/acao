@@ -11,9 +11,9 @@ import (
 	"github.com/asoul-video/asoul-video/pkg/model"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/pkg/errors"
-)
 
-const userAgent = `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36`
+	"github.com/asoul-video/acao/util"
+)
 
 var asoul = []model.MemberSecUID{
 	model.MemberSecUIDAva,
@@ -44,7 +44,7 @@ func SimpleScrap(method, url string) (jsoniter.RawMessage, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "new request")
 	}
-	req.Header.Set("User-Agent", userAgent)
+	req.Header.Set("User-Agent", util.UserAgent)
 
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {
