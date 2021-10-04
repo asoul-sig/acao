@@ -29,15 +29,23 @@ func (s *CreateVideo) String() string {
 func (s *CreateVideo) Scrap(result chan Result) {
 	defer func() { result <- Result{End: true} }()
 
-	for _, secUID := range asoul {
-		cursor := int64(0)
+	cursorSet := make(map[model.MemberSecUID]int64)
 
-		for {
+	for _, secUID := range asoul {
+		cursorSet[secUID] = 0
+	}
+
+	for len(cursorSet) > 0 {
+		for secUID, cursor := range cursorSet {
 			memberVideos, nextCursor, err := scrapMemberVideos(secUID, cursor)
 			if err != nil {
 				log.Error("Failed to scrap member videos: %v", err)
 				continue
 			}
+			if nextCursor == 0 {
+				delete(cursorSet, secUID)
+			}
+			cursorSet[secUID] = nextCursor
 
 			for _, video := range memberVideos {
 				log.Trace("Fetch video %q", video.Description)
@@ -51,11 +59,6 @@ func (s *CreateVideo) Scrap(result chan Result) {
 			result <- Result{
 				Data: callback,
 			}
-
-			if nextCursor == 0 {
-				break
-			}
-			cursor = nextCursor
 		}
 	}
 }
