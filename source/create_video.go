@@ -11,6 +11,7 @@ import (
 	"github.com/asoul-video/asoul-video/pkg/model"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/pkg/errors"
+	"github.com/thanhpk/randstr"
 	log "unknwon.dev/clog/v2"
 
 	"github.com/asoul-video/acao/util"
@@ -183,7 +184,7 @@ type videoInfo struct {
 }
 
 func scrapMemberVideos(secUID model.MemberSecUID, cursor int64) (videos []*model.CreateVideo, nextCursor int64, _ error) {
-	signature := util.MakeSignature("e99p1ant", util.UserAgent)
+	signature := util.MakeSignature("e99p1ant"+randstr.String(6), util.UserAgent)
 	log.Trace("Signature: %v", signature)
 
 	url := fmt.Sprintf("https://www.iesdouyin.com/web/api/v2/aweme/post/?sec_uid=%s&count=50&max_cursor=%d&_signature=%s", secUID, cursor, signature)
