@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
+
+	jsoniter "github.com/json-iterator/go"
 )
 
 // ConvertSignatureCDN converts the temporary CDN URL to long period URL.
@@ -23,9 +25,20 @@ func ConvertSignatureCDN(cdnURL string) string {
 	return u.String()
 }
 
+type imageInfo struct {
+	Width  int    `json:"width"`
+	Height int    `json:"height"`
+	Format string `json:"format"`
+	Size   int    `json:"size"`
+	Md5    string `json:"md5"`
+}
+
 // IsGIFImage checks whether the given CDN image file is a GIF image.
 func IsGIFImage(cdnURL string) bool {
-	req, err := http.NewRequest(http.MethodGet, cdnURL, nil)
+	cdnURL = strings.ReplaceAll(cdnURL, "/cdn/", "/")
+	infoURL := strings.SplitN(cdnURL, "~", 1)[0] + "~info"
+
+	req, err := http.NewRequest(http.MethodGet, infoURL, nil)
 	if err != nil {
 		return false
 	}
@@ -36,6 +49,15 @@ func IsGIFImage(cdnURL string) bool {
 	if err != nil {
 		return false
 	}
-	
-	return resp.Header.Get("Content-Type") == "application/octet-stream"
+	defer func() { _ = resp.Body.Close() }()
+
+	if resp.StatusCode/100 != 2 {
+		return false
+	}
+
+	var info imageInfo
+	if err := jsoniter.NewDecoder(resp.Body).Decode(&info); err != nil {
+		return false
+	}
+	return info.Format == "gif" || info.Format == "webp"
 }
