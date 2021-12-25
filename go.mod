@@ -3,7 +3,7 @@ module github.com/asoul-video/acao
 go 1.16
 
 require (
-	github.com/asoul-video/asoul-video v0.0.0-20210928182410-1498d8998fe8
+	github.com/asoul-video/asoul-video v0.0.0-20211225080059-c1b209746f37
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/flamego/flamego v0.0.0-20210913073131-adc6656c34a1
 	github.com/json-iterator/go v1.1.12

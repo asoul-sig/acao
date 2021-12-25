@@ -36,30 +36,28 @@ func (s *CreateVideo) Scrap(result chan Result) {
 		cursorSet[secUID] = 0
 	}
 
-	for len(cursorSet) > 0 {
-		for secUID, cursor := range cursorSet {
-			memberVideos, nextCursor, err := scrapMemberVideos(secUID, cursor)
-			if err != nil {
-				log.Error("Failed to scrap member videos: %v", err)
-				continue
-			}
-			if nextCursor == 0 {
-				delete(cursorSet, secUID)
-			}
-			cursorSet[secUID] = nextCursor
+	for secUID, cursor := range cursorSet {
+		memberVideos, nextCursor, err := scrapMemberVideos(secUID, cursor)
+		if err != nil {
+			log.Error("Failed to scrap member videos: %v", err)
+			continue
+		}
+		if nextCursor == 0 {
+			delete(cursorSet, secUID)
+		}
+		cursorSet[secUID] = nextCursor
 
-			for _, video := range memberVideos {
-				log.Trace("Fetch video %q", video.Description)
-			}
+		for _, video := range memberVideos {
+			log.Trace("Fetch video %q", video.Description)
+		}
 
-			callback, err := jsoniter.Marshal(memberVideos)
-			if err != nil {
-				log.Error("Failed to encode callback JSON: %v", err)
-				continue
-			}
-			result <- Result{
-				Data: callback,
-			}
+		callback, err := jsoniter.Marshal(memberVideos)
+		if err != nil {
+			log.Error("Failed to encode callback JSON: %v", err)
+			continue
+		}
+		result <- Result{
+			Data: callback,
 		}
 	}
 }

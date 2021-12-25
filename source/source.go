@@ -21,6 +21,7 @@ var asoul = []model.MemberSecUID{
 	model.MemberSecUIDCarol,
 	model.MemberSecUIDDiana,
 	model.MemberSecUIDEileen,
+	model.MemberSecUIDAcao,
 }
 
 type Result struct {

@@ -42,6 +42,7 @@ github.com/DataDog/zstd v1.4.5/go.mod h1:1jcaCB/ufaK+sKp1NBhlGmpz41jOoPQ35bpF36t
 github.com/Masterminds/semver/v3 v3.0.3/go.mod h1:VPu/7SZ7ePZ3QOrcuXROw5FAcLl4a0cBrbBpGY/8hQs=
 github.com/Microsoft/go-winio v0.4.15-0.20190919025122-fc70bd9a86b5/go.mod h1:tTuCMEN+UleMWgg9dVx4Hu52b1bJo+59jBh3ajtinzw=
 github.com/OneOfOne/xxhash v1.2.2/go.mod h1:HSdplMjZKSmBqAxg5vPj2TmRDmfkzw+cTzAElWljhcU=
+github.com/Shyp/go-dberror v0.0.0-20180123195207-36ecba57721e h1:IZUh3h8z+h/7feJrZvvE9wAsL6//9T/D1VYLHEejNtY=
 github.com/Shyp/go-dberror v0.0.0-20180123195207-36ecba57721e/go.mod h1:MhWOxc4KCt6KrmX1kPy9pI8Rx1ZA3IXjI2OHmMURdwA=
 github.com/alecthomas/participle/v2 v2.0.0-alpha5/go.mod h1:Z1zPLDbcGsVsBYsThKXY00i84575bN/nMczzIrU4rWU=
 github.com/alecthomas/participle/v2 v2.0.0-alpha7 h1:cK4vjj0VSgb3lN1nuKA5F7dw+1s1pWBe5bx7nNCnN+c=
@@ -56,6 +57,8 @@ github.com/apache/arrow/go/arrow v0.0.0-20200601151325-b2287a20f230/go.mod h1:QN
 github.com/armon/consul-api v0.0.0-20180202201655-eb2c6b5be1b6/go.mod h1:grANhF5doyWs3UAsr3K4I6qtAmlQcZDesFNEHPZAzj8=
 github.com/asoul-video/asoul-video v0.0.0-20210928182410-1498d8998fe8 h1:2NAsw/8aXcwLzwHaRGjLBaBS1lBIiXkvRTWj97bY6W0=
 github.com/asoul-video/asoul-video v0.0.0-20210928182410-1498d8998fe8/go.mod h1:LGJvtGlwaIUtruA0fzsn9UW7zCAbJEhrLqSeLMg2n9I=
+github.com/asoul-video/asoul-video v0.0.0-20211225080059-c1b209746f37 h1:47Y0DXpJ141/lGY0pNHuTjXCHRPnYFWtWuKyXLDLc9g=
+github.com/asoul-video/asoul-video v0.0.0-20211225080059-c1b209746f37/go.mod h1:LGJvtGlwaIUtruA0fzsn9UW7zCAbJEhrLqSeLMg2n9I=
 github.com/aws/aws-sdk-go v1.17.7/go.mod h1:KmX6BPdI08NWTb3/sm4ZGu5ShLoqVDhKgpiN924inxo=
 github.com/beeker1121/goque v1.0.3-0.20191103205551-d618510128af/go.mod h1:84CWnaDz4g1tEVnFLnuBigmGK15oPohy0RfvSN8d4eg=
 github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973/go.mod h1:Dwedo/Wpr24TaqPxmxbtue+5NUziq4I4S80YR8gNf3Q=
@@ -124,6 +127,7 @@ github.com/flamego/flamego v0.0.0-20210515130931-267d0ace579b/go.mod h1:DkwGPPSO
 github.com/flamego/flamego v0.0.0-20210731091930-363f52fa2c13/go.mod h1:DkwGPPSOX6S/4th2btOuP3HQX8zL59GZbxxOt6aFF0A=
 github.com/flamego/flamego v0.0.0-20210913073131-adc6656c34a1 h1:+WQYuogBWs50/qWau4AaqCTJzGyrx6du7bTyLPoVAtU=
 github.com/flamego/flamego v0.0.0-20210913073131-adc6656c34a1/go.mod h1:apiAxIxeHujHFX4Yr0BHmQFJuZUM07XztdQSChbeuPw=
+github.com/flamego/template v0.0.0-20210914144450-be182d441b73 h1:Zlafkjv8W1QqlfNqH8kKmelAt8X/CPkUuqo6otv4F0o=
 github.com/flamego/template v0.0.0-20210914144450-be182d441b73/go.mod h1:9bdmujHm26rSXXYmDQ3pfzUoKuV0R3BahgmSsSbvqUU=
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
 github.com/fsouza/fake-gcs-server v1.17.0/go.mod h1:D1rTE4YCyHFNa99oyJJ5HyclvN/0uQR+pM/VdlL83bw=
@@ -175,6 +179,7 @@ github.com/gofrs/uuid v3.2.0+incompatible/go.mod h1:b2aQJv3Z4Fp6yNu3cdSllBxTCLRx
 github.com/gogo/protobuf v1.1.1/go.mod h1:r8qH/GZQm5c6nD/R0oafs1akxWv10x8SbQlK7atdtwQ=
 github.com/gogo/protobuf v1.2.1/go.mod h1:hp+jE20tsWTFYpLwKvXlhS1hjn+gTNwPg2I6zVXpSg4=
 github.com/gogo/protobuf v1.3.1/go.mod h1:SlYgWuQ5SjCEi6WLHjHCa1yvBfUnHcTbrrZtXPKa29o=
+github.com/golang-migrate/migrate/v4 v4.14.1 h1:qmRd/rNGjM1r3Ve5gHd5ZplytrD02UcItYNxJ3iUHHE=
 github.com/golang-migrate/migrate/v4 v4.14.1/go.mod h1:l7Ks0Au6fYHuUIxUhQ0rcVX1uLlJg54C/VvW7tvxSz0=
 github.com/golang-sql/civil v0.0.0-20190719163853-cb61b32ac6fe/go.mod h1:8vg3r2VgvsThLBIFL93Qb5yWzgyZWhEmBwUJWevAkK0=
 github.com/golang/glog v0.0.0-20160126235308-23def4e6c14b/go.mod h1:SBH7ygxi8pfUlaOkMMuAQtPIUF8ecWP5IEl/CR7VP2Q=
@@ -248,7 +253,9 @@ github.com/grpc-ecosystem/go-grpc-middleware v1.0.0/go.mod h1:FiyG127CGDf3tlThmg
 github.com/grpc-ecosystem/go-grpc-prometheus v1.2.0/go.mod h1:8NvIoxWQoOIhqOTXgfV/d3M/q6VIi02HzZEHgUlZvzk=
 github.com/grpc-ecosystem/grpc-gateway v1.9.0/go.mod h1:vNeuVxBJEsws4ogUvrchl83t/GYV9WGTSLVdBhOQFDY=
 github.com/hailocab/go-hostpool v0.0.0-20160125115350-e80d13ce29ed/go.mod h1:tMWxXQ9wFIaZeTI9F+hmhFiGpFmhOHzyShyFUhRm0H4=
+github.com/hashicorp/errwrap v1.0.0 h1:hLrqtEDnRye3+sgx6z4qVLNuviH3MR5aQ0ykNJa/UYA=
 github.com/hashicorp/errwrap v1.0.0/go.mod h1:YH+1FKiLXxHSkmPseP+kNlulaMuP3n2brvKWEqk/Jc4=
+github.com/hashicorp/go-multierror v1.1.0 h1:B9UzwGQJehnUY1yNrnwREHc3fGbC2xefo8g4TbElacI=
 github.com/hashicorp/go-multierror v1.1.0/go.mod h1:spPvp8C1qA32ftKqdAHm4hHTbPw+vmowP0z+KUhOZdA=
 github.com/hashicorp/golang-lru v0.5.0/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
 github.com/hashicorp/golang-lru v0.5.1/go.mod h1:/m3WP610KZHVQ1SGc6re/UDhFvYD7pJ4Ao+sR/qLZy8=
@@ -336,6 +343,7 @@ github.com/lib/pq v1.0.0/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
 github.com/lib/pq v1.1.0/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
 github.com/lib/pq v1.2.0/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
 github.com/lib/pq v1.3.0/go.mod h1:5WUZQaWbwv1U+lTReE5YruASi9Al49XbQIvNi/34Woo=
+github.com/lib/pq v1.8.0 h1:9xohqzkUwzR4Ga4ivdTcawVS89YSDVxXMa3xJX3cGzg=
 github.com/lib/pq v1.8.0/go.mod h1:AlVN5x4E4T544tWzH6hKfbfQvm3HdbOxrmggDNAPY9o=
 github.com/luna-duclos/instrumentedsql v1.1.3/go.mod h1:9J1njvFds+zN7y85EDhN9XNQLANWwZt2ULeIC8yMNYs=
 github.com/magiconair/properties v1.8.0/go.mod h1:PppfXfuXeibc/6YijjN8zIbojt8czPbwD3XqdrwzmxQ=
@@ -883,4 +891,5 @@ rsc.io/quote/v3 v3.1.0/go.mod h1:yEA65RcK8LyAZtP9Kv3t0HmxON59tX3rD+tICJqUlj0=
 rsc.io/sampler v1.3.0/go.mod h1:T1hPZKmBbMNahiBKFy5HrXp6adAjACjK9JXDnKaTXpA=
 unknwon.dev/clog/v2 v2.2.0 h1:jkPdsxux0MC04BT/9NHbT75z4prK92SH10VBNmIpVCc=
 unknwon.dev/clog/v2 v2.2.0/go.mod h1:zvUlyibDHI4mykYdWyWje2G9nF/nBzfDOqRo2my4mWc=
+upper.io/db.v3 v3.8.0+incompatible h1:XNeEO2vQRVqq70M98ghzq6M30F5Bzo+99ess5v+eVYw=
 upper.io/db.v3 v3.8.0+incompatible/go.mod h1:FgTdD24eBjJAbPKsQSiHUNgXjOR4Lub3u1UMHSIh82Y=
