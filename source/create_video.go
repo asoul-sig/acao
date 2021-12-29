@@ -37,15 +37,11 @@ func (s *CreateVideo) Scrap(result chan Result) {
 	}
 
 	for secUID, cursor := range cursorSet {
-		memberVideos, nextCursor, err := scrapMemberVideos(secUID, cursor)
+		memberVideos, _, err := scrapMemberVideos(secUID, cursor)
 		if err != nil {
 			log.Error("Failed to scrap member videos: %v", err)
 			continue
 		}
-		if nextCursor == 0 {
-			delete(cursorSet, secUID)
-		}
-		cursorSet[secUID] = nextCursor
 
 		for _, video := range memberVideos {
 			log.Trace("Fetch video %q", video.Description)
@@ -58,6 +54,11 @@ func (s *CreateVideo) Scrap(result chan Result) {
 		}
 		result <- Result{
 			Data: callback,
+		}
+
+		delete(cursorSet, secUID)
+		if len(cursorSet) == 0 {
+			break
 		}
 	}
 }
