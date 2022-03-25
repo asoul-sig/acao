@@ -7,7 +7,7 @@ package source
 import (
 	"net/http"
 
-	"github.com/asoul-video/asoul-video/pkg/model"
+	"github.com/asoul-sig/asoul-video/pkg/model"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/pkg/errors"
 	log "unknwon.dev/clog/v2"
