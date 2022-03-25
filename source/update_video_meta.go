@@ -97,7 +97,7 @@ func (s *UpdateVideoMeta) scrapVideoList(page int) ([]*model.UpdateVideoMeta, er
 			break
 		}
 		if err != nil {
-			log.Error("Failed to get video %q meta data: %v", err)
+			log.Error("Failed to get video %q meta data: %v", id, err)
 			continue
 		}
 
