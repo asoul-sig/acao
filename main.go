@@ -11,9 +11,9 @@ import (
 	"github.com/pkg/errors"
 	log "unknwon.dev/clog/v2"
 
-	"github.com/asoul-video/asoul-video/pkg/model"
+	"github.com/asoul-sig/asoul-video/pkg/model"
 
-	"github.com/asoul-video/acao/source"
+	"github.com/asoul-sig/acao/source"
 )
 
 func main() {

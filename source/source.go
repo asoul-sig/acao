@@ -8,11 +8,11 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/asoul-video/asoul-video/pkg/model"
+	"github.com/asoul-sig/asoul-video/pkg/model"
 	jsoniter "github.com/json-iterator/go"
 	"github.com/pkg/errors"
 
-	"github.com/asoul-video/acao/util"
+	"github.com/asoul-sig/acao/util"
 )
 
 var asoul = []model.MemberSecUID{
