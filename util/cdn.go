@@ -36,6 +36,7 @@ type imageInfo struct {
 // IsGIFImage checks whether the given CDN image file is a GIF image.
 func IsGIFImage(cdnURL string) bool {
 	cdnURL = strings.ReplaceAll(cdnURL, "/cdn/", "/")
+	cdnURL = strings.ReplaceAll(cdnURL, "/obj/", "/")
 	infoURL := strings.SplitN(cdnURL, "~", 1)[0] + "~info"
 
 	req, err := http.NewRequest(http.MethodGet, infoURL, nil)
